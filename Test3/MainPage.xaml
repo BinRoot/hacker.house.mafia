@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="Test3.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Test3"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:bm="using:Bing.Maps"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+        
+            <bm:Map ZoomLevel="7.5" Credentials="INSERT_YOUR_BING_MAPS_KEY" Grid.Column="0" Grid.ColumnSpan="2">
+                <bm:Map.Center>
+                    <bm:Location Latitude="48" Longitude="-122.580489" />
+                </bm:Map.Center>
+
+                <bm:Map.Children>
+                    <bm:Pushpin>
+                        <bm:MapLayer.Position>
+                            <bm:Location Latitude="47.610039" Longitude="-122.342207" />
+                        </bm:MapLayer.Position>
+                    </bm:Pushpin>
+                </bm:Map.Children>
+            </bm:Map>
+            
+        
+        <ListView Grid.Column="1" Background="#88000000">
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>shit1</ListBoxItem>
+
+        </ListView>
+        
+    </Grid>
+</Page>
