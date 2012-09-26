@@ -13,11 +13,14 @@
             <ColumnDefinition />
             <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
-        
-            <bm:Map ZoomLevel="7.5" Credentials="INSERT_YOUR_BING_MAPS_KEY" Grid.Column="0" Grid.ColumnSpan="2">
+
+        <bm:Map Name="MainMap" ZoomLevel="3" Credentials="AhrsbBfWVAnxFwOsw5ARNmg2r_rjHf5nNTKa-bsdhKUZaLSwIsLi7m5_lo86b2XL" Grid.Column="0" Grid.ColumnSpan="2" FontFamily="Global User Interface" Opacity="0.99" RenderTransformOrigin="0.5,0.5">
+        	    
+            
                 <bm:Map.Center>
                     <bm:Location Latitude="48" Longitude="-122.580489" />
                 </bm:Map.Center>
+           
 
                 <bm:Map.Children>
                     <bm:Pushpin>
@@ -25,43 +28,176 @@
                             <bm:Location Latitude="47.610039" Longitude="-122.342207" />
                         </bm:MapLayer.Position>
                     </bm:Pushpin>
-                </bm:Map.Children>
+
+                <bm:Pushpin>
+                    <bm:MapLayer.Position>
+                        <bm:Location Latitude="34.8545" Longitude="37.0261" />
+                    </bm:MapLayer.Position>
+                </bm:Pushpin>
+
+                <bm:Pushpin>
+                    <bm:MapLayer.Position>
+                        <bm:Location Latitude="32.9043" Longitude="110.4677" />
+                    </bm:MapLayer.Position>
+                </bm:Pushpin>
+
+                <bm:Pushpin>
+                    <bm:MapLayer.Position>
+                        <bm:Location Latitude="33.6804" Longitude="51.1689" />
+                    </bm:MapLayer.Position>
+                </bm:Pushpin>
+
+                <bm:Pushpin>
+                    <bm:MapLayer.Position>
+                        <bm:Location Latitude="40.7143" Longitude="73.8204" />
+                    </bm:MapLayer.Position>
+                </bm:Pushpin>
+
+                <bm:Pushpin>
+                    <bm:MapLayer.Position>
+                        <bm:Location Latitude="40.2012" Longitude="127.2565" />
+                    </bm:MapLayer.Position>
+                </bm:Pushpin>
+            </bm:Map.Children>
             </bm:Map>
             
         
         <ListView Grid.Column="1" Background="#88000000">
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
-            <ListBoxItem>shit1</ListBoxItem>
+            <ListBoxItem>
+                <StackPanel>
+
+                    <Image Source="http://graphics8.nytimes.com/images/2012/09/26/world/26prexy2/26prexy2-articleLarge.jpg" Tapped="Image_Tapped_1"></Image>
+                    
+                    <TextBlock TextWrapping="Wrap">
+                        'Time Is Not Unlimited,' Obama Warns Iran at UN - New York Times
+                    </TextBlock>
+
+                    <TextBlock Foreground="LightBlue">
+                    2 sec ago
+                    </TextBlock>
+
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <StackPanel>
+                    
+                <TextBlock TextWrapping="Wrap">
+                    Bomb attack at Syrian school kills government troops, rebels say - Los Angeles Times
+                </TextBlock>
+                
+                <TextBlock Foreground="LightBlue">
+                    14 sec ago
+                </TextBlock>
+
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <StackPanel>
+                    
+                <TextBlock TextWrapping="Wrap">
+                    China puts aircraft carrier into service - Financial Times
+                </TextBlock>
+
+
+                <TextBlock Foreground="LightBlue">
+                    55 sec ago
+                </TextBlock>
+
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <StackPanel>
+                <TextBlock TextWrapping="Wrap">
+                    BBC regrets noting Queen's private view in terror case - USA TODAY
+                </TextBlock>
+
+
+                <TextBlock Foreground="LightBlue">
+                    1 min ago
+                </TextBlock>
+
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <StackPanel>
+                    
+                <TextBlock TextWrapping="Wrap">
+                    Libya gov't tries to woo militias into subordination, but militias still hold ... - CBS News
+                </TextBlock>
+
+
+                <TextBlock Foreground="LightBlue">
+                    1 min ago
+                </TextBlock>
+
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <StackPanel>
+                    
+                <TextBlock TextWrapping="Wrap">
+                    Commentary: Japanese PM's attempt to confuse world at UN over Diaoyu Islands ... - Xinhua
+                </TextBlock>
+
+                <TextBlock Foreground="LightBlue">
+                    2 min ago
+                </TextBlock>
+
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <StackPanel>
+                    
+                <TextBlock TextWrapping="Wrap">
+                    UN chief demands global action to end war in Syria - Businessweek
+                </TextBlock>
+
+                <TextBlock Foreground="LightBlue">
+                    4 min ago
+                </TextBlock>
+
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <StackPanel>
+                    
+                <TextBlock TextWrapping="Wrap">
+                    North Korea reforms? Hopes dashed after parliament session - Christian Science Monitor
+                </TextBlock>
+
+                <TextBlock Foreground="LightBlue">
+                    4 min ago
+                </TextBlock>
+
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <StackPanel>
+                    
+                <TextBlock TextWrapping="Wrap">
+                    Russia praises Belarus vote, rejects OSCE criticism - Jerusalem Post
+                </TextBlock>
+
+                <TextBlock Foreground="LightBlue">
+                    5 min ago
+                </TextBlock>
+
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <StackPanel>
+                    
+                <TextBlock TextWrapping="Wrap">
+                    Yom Kippur is a reminder that we can't only commit halfway to God - Washington Post
+                </TextBlock>
+
+                <TextBlock Foreground="LightBlue">
+                    7 min ago
+                </TextBlock>
+
+                </StackPanel>
+            </ListBoxItem>
+            
 
         </ListView>
         

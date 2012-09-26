@@ -24,6 +24,13 @@ namespace Test3
         public MainPage()
         {
             this.InitializeComponent();
+            
+            
+        }
+
+        static void Sleep(int ms)
+        {
+            new System.Threading.ManualResetEvent(false).WaitOne(ms);
         }
 
         /// <summary>
@@ -33,6 +40,22 @@ namespace Test3
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            
+        }
+
+        private void FlipMap()
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                PlaneProjection pp = new PlaneProjection();
+                pp.RotationX = i;
+                MainMap.Projection = pp;
+            }
+        }
+
+        private void Image_Tapped_1(object sender, TappedRoutedEventArgs e)
+        {
+            FlipMap();
         }
     }
 }
