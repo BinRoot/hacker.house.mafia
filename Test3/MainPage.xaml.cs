@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NewsLib.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,7 +26,28 @@ namespace Test3
         {
             this.InitializeComponent();
             
-            
+            List<NewsItem> newsItems = new List<NewsItem>();
+            NewsItem ni = new NewsItem();
+            ni.Title = "testing...";
+            ni.DateAdded = DateTime.Now.AddSeconds(-12);
+            ni.ImgUri=new Uri("http://graphics8.nytimes.com/images/2012/09/26/world/26prexy2/26prexy2-articleLarge.jpg");
+            newsItems.Add(ni);
+
+            NewsItem ni2 = new NewsItem();
+            ni2.Title = "Jasdev Singh";
+            ni2.DateAdded = DateTime.Now.AddSeconds(-12);
+            ni2.ImgUri = new Uri("http://i.imgur.com/RYOjN.gif");
+            newsItems.Add(ni2);
+
+            NewsItem ni3 = new NewsItem();
+            ni3.Title = "Jasdev Singh";
+            ni3.DateAdded = DateTime.Now.AddSeconds(-12);
+            ni3.ImgUri = new Uri("http://i.imgur.com/RYOjN.gif");
+            newsItems.Add(ni3);
+
+        
+
+            NewsListView.DataContext = newsItems;
         }
 
         static void Sleep(int ms)
