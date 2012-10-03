@@ -7,7 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:bm="using:Bing.Maps"
     mc:Ignorable="d">
+    
 
+    
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -23,11 +25,6 @@
            
 
                 <bm:Map.Children>
-                    <bm:Pushpin>
-                        <bm:MapLayer.Position>
-                            <bm:Location Latitude="47.610039" Longitude="-122.342207" />
-                        </bm:MapLayer.Position>
-                    </bm:Pushpin>
 
                 <bm:Pushpin>
                     <bm:MapLayer.Position>
