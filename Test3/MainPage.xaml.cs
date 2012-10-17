@@ -1,4 +1,6 @@
-﻿using NewsLib.Model;
+﻿using NewsLib;
+using NewsLib.Model;
+using NewsLib.NewsUpdaters;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,12 +22,15 @@ namespace Test3
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page, INewsUpdater
     {
+
+        List<NewsItem> news = new List<NewsItem>();
+
         public MainPage()
         {
             this.InitializeComponent();
-            
+
             List<NewsItem> newsItems = new List<NewsItem>();
             NewsItem ni = new NewsItem();
             ni.Title = "testing...";
@@ -62,8 +67,23 @@ namespace Test3
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            
+            INewsUpdater blekkoUpdater = new BlekkoUpdater();
+            List<INewsUpdater> newsSources = new List<INewsUpdater>();
+            newsSources.Add(blekkoUpdater);
+            NewsReader nr = new NewsReader(newsSources);
+            Update(nr);
         }
+
+        public void Update(NewsReader nr)
+        {
+            nr.ReadAllNews(this);
+        }
+
+        public void RespondToUpdate(List<NewsItem> newsItems)
+        {
+            news.AddRange(newsItems);
+        }
+        public void RespondToUpdate(string rawNewsItems) { } // no implementation;
 
         private void FlipMap()
         {

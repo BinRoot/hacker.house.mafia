@@ -10,20 +10,26 @@ namespace NewsLib
     public class NewsReader
     {
         private List<INewsUpdater> newsSources;
+        INewsUpdater nr;
 
         public NewsReader(List<INewsUpdater> newsSources)
         {
             this.newsSources = newsSources;
         }
 
-        public List<NewsItem> ReadAllNews()
+        public void ReadAllNews(INewsUpdater nr)
         {
-            List<NewsItem> news = new List<NewsItem>();
+            this.nr = nr;
             foreach (INewsUpdater nu in newsSources)
             {
-                news.AddRange(nu.Update());
+                nu.Update(this);
             }
-            return news;
+        }
+
+        // FIXME: Will this code break when there are multiple news sources?
+        public void RespondToUpdate(List<NewsItem> newsItems)
+        {
+            nr.RespondToUpdate(newsItems);
         }
     }
 }

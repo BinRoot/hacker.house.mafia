@@ -9,6 +9,10 @@ namespace NewsLib
 {
     public interface INewsUpdater
     {
-        List<NewsItem> Update();
+        void Update(NewsReader nr);
+
+        void RespondToUpdate(List<NewsItem> newsItems);
+
+        void RespondToUpdate(string rawNewsItems);
     }
 }
