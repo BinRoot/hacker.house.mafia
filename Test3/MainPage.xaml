@@ -24,7 +24,7 @@
                 </bm:Map.Center>
            
 
-                <bm:Map.Children>
+                <!--<bm:Map.Children>
 
                 <bm:Pushpin>
                     <bm:MapLayer.Position>
@@ -55,7 +55,7 @@
                         <bm:Location Latitude="40.2012" Longitude="127.2565" />
                     </bm:MapLayer.Position>
                 </bm:Pushpin>
-            </bm:Map.Children>
+            </bm:Map.Children>-->
             </bm:Map>
             
         

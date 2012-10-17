@@ -110,8 +110,79 @@ namespace Test3
 
         public void RespondToUpdate(List<NewsItem> newsItems)
         {
-            news.AddRange(newsItems);
+            List<NewsItem> reallyNewItems = new List<NewsItem>();
+            if (news.Count == 0)
+            {
+                news.AddRange(newsItems);
+            }
+            else
+            {
+                foreach (NewsItem ni in newsItems)
+                {
+                    Boolean found = false;
+                    foreach (NewsItem ni2 in news)
+                    {
+                        if (ni.Title == ni2.Title)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found)
+                    {
+                        reallyNewItems.Add(ni);
+                    }
+                }
+            }
+
+
+            news.AddRange(reallyNewItems);
+
+
+            this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(
+                () =>
+                {
+                    NewsListView.DataContext = null;
+                    NewsListView.DataContext = news;
+
+                    MainMap.Children.Clear();
+                }));
+
+
+            foreach (NewsItem ni in newsItems)
+            {
+                AlchemyService.StartWebRequest(ni, this);
+            }
+
+            
         }
+
+        public void RespondToAlchemyUpdate(NewsItem newni)
+        {
+            if (newni != null)
+            {
+                foreach (NewsItem ni in news)
+                {
+                    if (newni.Title == ni.Title)
+                    {
+                        ni.setLocation(newni.Latitude, newni.Longitude);
+
+                        this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(
+                           () =>
+                           {
+                               Pushpin newp = new Pushpin();
+                               newp.Tag = ni;
+                               MainMap.Children.Add(newp);
+                               MapLayer.SetPosition(newp, new Location(ni.Latitude, ni.Longitude));
+                           }));
+                    }
+                }
+            }
+        }
+
+
+
+
         public void RespondToUpdate(string rawNewsItems) { } // no implementation;
 
         private void FlipMap()

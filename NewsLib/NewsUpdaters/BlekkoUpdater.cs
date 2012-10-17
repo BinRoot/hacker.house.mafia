@@ -37,12 +37,19 @@ namespace NewsLib.NewsUpdaters
             {
                 JObject jao = (JObject)ja[i];
                 string snippet = (string)jao["snippet"];
-                
+                snippet = System.Net.WebUtility.HtmlDecode(snippet);
+
                 NewsItem ni = new NewsItem();
                 ni.Description = snippet;
+                ni.Title = snippet;
+
+                string urlFound = (string)jao["url"];
+                ni.LinkUri = new Uri(urlFound);
+
+                newsList.Add(ni);
             }
 
-
+            nr.RespondToUpdate(newsList);
           //  nr.RespondToUpdate(
         } 
 

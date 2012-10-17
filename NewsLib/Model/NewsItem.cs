@@ -29,7 +29,14 @@ namespace NewsLib.Model
         {
             get
             {
-                return new BitmapImage(ImgUri);
+                try
+                {
+                    return new BitmapImage(ImgUri);
+                }
+                catch
+                {
+                    return new BitmapImage( new Uri("http://placekitten.com/200/300") );
+                }
             }
         }
 
