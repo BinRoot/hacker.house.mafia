@@ -6,6 +6,13 @@
 
     <Application.Resources>
         <ResourceDictionary>
+
+            <ControlTemplate x:Key="MeTemplate">
+                <Grid>
+                    <Image VerticalAlignment="Top"  HorizontalAlignment="Left" Source="Assets/me.png"> </Image>
+                </Grid>
+            </ControlTemplate>
+
             <ResourceDictionary.MergedDictionaries>
 
                 <!-- 

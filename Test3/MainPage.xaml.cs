@@ -1,12 +1,16 @@
 ﻿using NewsLib;
 using NewsLib.Model;
 using NewsLib.NewsUpdaters;
+﻿using Bing.Maps;
+using NewsLib.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -26,6 +30,8 @@ namespace Test3
     {
 
         List<NewsItem> news = new List<NewsItem>();
+        Geolocator geolocator;
+        Pushpin me;
 
         public MainPage()
         {
@@ -53,6 +59,29 @@ namespace Test3
         
 
             NewsListView.DataContext = newsItems;
+
+            geolocator = new Geolocator();
+            me = new Pushpin();
+            me.Template = (Application.Current.Resources["MeTemplate"] as ControlTemplate);
+            MainMap.Children.Add(me);
+
+            geolocator.PositionChanged += new Windows.Foundation.TypedEventHandler<Geolocator, PositionChangedEventArgs>(geolocator_PositionChanged);
+        }
+
+        private void geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
+        {
+            // Need to set map view on UI thread.
+            this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(
+                () =>
+                {
+                    displayPosition(this, args);
+                }));
+        }
+
+        private void displayPosition(object sender, PositionChangedEventArgs args)
+        {
+            Location location = new Location(args.Position.Coordinate.Latitude, args.Position.Coordinate.Longitude);
+            MapLayer.SetPosition(me, location);
         }
 
         static void Sleep(int ms)
