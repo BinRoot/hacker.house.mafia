@@ -12,7 +12,7 @@ namespace NewsLib
     {
         public static void Test()
         {
-            INewsUpdater blekkoUpdater = new BlekkoUpdater();
+            INewsUpdater blekkoUpdater = new BlekkoChinaUpdater();
             List<INewsUpdater> newsSources = new List<INewsUpdater>();
             newsSources.Add(blekkoUpdater);
             NewsReader nr = new NewsReader(newsSources);

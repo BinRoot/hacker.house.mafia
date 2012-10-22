@@ -143,11 +143,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Bing.Maps.Xaml, Version=1.0">
-      <Name>Bing Maps for C#, C++, or Visual Basic %28Beta%29</Name>
-    </SDKReference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\NewsLib\NewsLib.csproj">
       <Project>{9a22e906-133d-47aa-8bdb-7823c9dedf8e}</Project>
       <Name>NewsLib</Name>
@@ -158,6 +153,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.4.5.10\lib\winrt45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="Bing.Maps.Xaml, Version=1.0">
+      <Name>Bing Maps for C#, C++, or Visual Basic</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Popups;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -37,28 +38,28 @@ namespace Test3
         {
             this.InitializeComponent();
 
-            List<NewsItem> newsItems = new List<NewsItem>();
-            NewsItem ni = new NewsItem();
-            ni.Title = "testing...";
-            ni.DateAdded = DateTime.Now.AddSeconds(-12);
-            ni.ImgUri=new Uri("http://graphics8.nytimes.com/images/2012/09/26/world/26prexy2/26prexy2-articleLarge.jpg");
-            newsItems.Add(ni);
+            //List<NewsItem> newsItems = new List<NewsItem>();
+            //NewsItem ni = new NewsItem();
+            //ni.Title = "testing...";
+            //ni.DateAdded = DateTime.Now.AddSeconds(-12);
+            //ni.ImgUri=new Uri("http://graphics8.nytimes.com/images/2012/09/26/world/26prexy2/26prexy2-articleLarge.jpg");
+            //newsItems.Add(ni);
 
-            NewsItem ni2 = new NewsItem();
-            ni2.Title = "Jasdev Singh";
-            ni2.DateAdded = DateTime.Now.AddSeconds(-12);
-            ni2.ImgUri = new Uri("http://i.imgur.com/RYOjN.gif");
-            newsItems.Add(ni2);
+            //NewsItem ni2 = new NewsItem();
+            //ni2.Title = "Jasdev Singh";
+            //ni2.DateAdded = DateTime.Now.AddSeconds(-12);
+            //ni2.ImgUri = new Uri("http://i.imgur.com/RYOjN.gif");
+            //newsItems.Add(ni2);
 
-            NewsItem ni3 = new NewsItem();
-            ni3.Title = "Jasdev Singh";
-            ni3.DateAdded = DateTime.Now.AddSeconds(-12);
-            ni3.ImgUri = new Uri("http://i.imgur.com/RYOjN.gif");
-            newsItems.Add(ni3);
+            //NewsItem ni3 = new NewsItem();
+            //ni3.Title = "Jasdev Singh";
+            //ni3.DateAdded = DateTime.Now.AddSeconds(-12);
+            //ni3.ImgUri = new Uri("http://i.imgur.com/RYOjN.gif");
+            //newsItems.Add(ni3);
 
         
 
-            NewsListView.DataContext = newsItems;
+            //NewsListView.DataContext = newsItems;
 
             geolocator = new Geolocator();
             me = new Pushpin();
@@ -96,9 +97,20 @@ namespace Test3
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            INewsUpdater blekkoUpdater = new BlekkoUpdater();
+            INewsUpdater blekkoChinaUpdater = new BlekkoChinaUpdater();
+            INewsUpdater blekkoEuropeUpdater = new BlekkoEuropeUpdater();
+            INewsUpdater blekkoAfricaUpdater = new BlekkoAfricaUpdater();
+            INewsUpdater blekkoIndiaUpdater = new BlekkoIndiaUpdater();
+            INewsUpdater blekkoSAUpdater = new BlekkoSAUpdater();
+            INewsUpdater blekkoUSUpdater = new BlekkoUSUpdater();
+
             List<INewsUpdater> newsSources = new List<INewsUpdater>();
-            newsSources.Add(blekkoUpdater);
+            newsSources.Add(blekkoChinaUpdater);
+            newsSources.Add(blekkoEuropeUpdater);
+            newsSources.Add(blekkoAfricaUpdater);
+            newsSources.Add(blekkoIndiaUpdater);
+            newsSources.Add(blekkoSAUpdater);
+            newsSources.Add(blekkoUSUpdater);
             NewsReader nr = new NewsReader(newsSources);
             Update(nr);
         }
@@ -139,16 +151,17 @@ namespace Test3
             news.AddRange(reallyNewItems);
 
 
-            this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(
-                () =>
-                {
-                    NewsListView.DataContext = null;
-                    NewsListView.DataContext = news;
+            //this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(
+            //    () =>
+            //    {
+            //        NewsListView.DataContext = null;
+            //        NewsListView.DataContext = news;
 
-                    MainMap.Children.Clear();
-                }));
+            //        MainMap.Children.Clear();
+            //    }));
 
-
+            size = newsItems.Count;
+            count = 1;
             foreach (NewsItem ni in newsItems)
             {
                 AlchemyService.StartWebRequest(ni, this);
@@ -157,9 +170,31 @@ namespace Test3
             
         }
 
+        int count = 1;
+        int size = 0;
+        List<NewsItem> thingsToRemove = new List<NewsItem>();
+
         public void RespondToAlchemyUpdate(NewsItem newni)
         {
-            if (newni != null)
+            if (count >= size)
+            {
+                this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(
+                   () =>
+                   {
+
+                       foreach (NewsItem ri in thingsToRemove)
+                       {
+                           news.Remove(ri);
+                       }
+
+                       NewsListView.DataContext = null;
+                       NewsListView.DataContext = news;
+
+                       thingsToRemove.Clear();
+                   }));
+            }
+            count++;
+            if (!((newni.Latitude == 0.0)&&(newni.Longitude == 0.0)))
             {
                 foreach (NewsItem ni in news)
                 {
@@ -171,6 +206,7 @@ namespace Test3
                            () =>
                            {
                                Pushpin newp = new Pushpin();
+                               newp.Tapped += newp_Tapped;
                                newp.Tag = ni;
                                MainMap.Children.Add(newp);
                                MapLayer.SetPosition(newp, new Location(ni.Latitude, ni.Longitude));
@@ -178,6 +214,20 @@ namespace Test3
                     }
                 }
             }
+            else
+            {
+                thingsToRemove.Add(newni);
+            }
+        }
+
+        async void newp_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Pushpin v = (Pushpin)sender;
+            // Create the message dialog and set its content; it will get a default "Close" button since there aren't any other buttons being added
+            var messageDialog = new MessageDialog(((NewsItem)v.Tag).Title);
+
+            // Show the message dialog and wait
+            await messageDialog.ShowAsync();
         }
 
 
@@ -197,7 +247,25 @@ namespace Test3
 
         private void Image_Tapped_1(object sender, TappedRoutedEventArgs e)
         {
-            FlipMap();
+            Image img = (Image)sender;
+            NewsItem ni = (NewsItem)img.Tag;
+
+            foreach (Pushpin p in MainMap.Children)
+            {
+                MainMap.Center = new Location(ni.Latitude, ni.Longitude);
+                p.Background = new SolidColorBrush(Windows.UI.Colors.CornflowerBlue);
+              
+            }
+
+            foreach (Pushpin p in MainMap.Children)
+            {
+                if (p.Tag == ni)
+                {
+                    p.Background = new SolidColorBrush(Windows.UI.Colors.HotPink);
+                    break;
+                }
+            }
+            
         }
     }
 }

@@ -59,7 +59,6 @@ namespace NewsLib
             }
 
             // update ni with lat long
-            if (!updated) mp.RespondToAlchemyUpdate(null);
             mp.RespondToAlchemyUpdate(ni);
         }
 

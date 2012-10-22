@@ -103,7 +103,12 @@
     <Compile Include="INewsUpdater.cs" />
     <Compile Include="Model\NewsItem.cs" />
     <Compile Include="NewsReader.cs" />
-    <Compile Include="NewsUpdaters\BlekkoUpdater.cs" />
+    <Compile Include="NewsUpdaters\BlekkoChinaUpdater.cs" />
+    <Compile Include="NewsUpdaters\BlekkoEuropeUpdater.cs" />
+    <Compile Include="NewsUpdaters\BlekkoUSUpdater.cs" />
+    <Compile Include="NewsUpdaters\BlekkoAfricaUpdater.cs" />
+    <Compile Include="NewsUpdaters\BlekkoIndiaUpdater.cs" />
+    <Compile Include="NewsUpdaters\BlekkoSAUpdater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestCode.cs" />
   </ItemGroup>
