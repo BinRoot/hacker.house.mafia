@@ -123,6 +123,16 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Images\cbs-fitted.png" />
+    <Content Include="Images\chicago-fitted.png" />
+    <Content Include="Images\cnn-fitted.png" />
+    <Content Include="Images\fox-fitted.png" />
+    <Content Include="Images\gazette-fitted.png" />
+    <Content Include="Images\reuters-fitted.jpg" />
+    <Content Include="Images\sfgate-fitted.png" />
+    <Content Include="Images\usa-today-fitted.png" />
+    <Content Include="Images\washington-fitted.png" />
+    <Content Include="Images\wsj-fitted.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

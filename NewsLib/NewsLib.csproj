@@ -121,6 +121,18 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\cbs-fitted.png" />
+    <Content Include="Images\chicago-fitted.png" />
+    <Content Include="Images\cnn-fitted.png" />
+    <Content Include="Images\fox-fitted.png" />
+    <Content Include="Images\gazette-fitted.png" />
+    <Content Include="Images\reuters-fitted.jpg" />
+    <Content Include="Images\sfgate-fitted.png" />
+    <Content Include="Images\usa-today-fitted.png" />
+    <Content Include="Images\washington-fitted.png" />
+    <Content Include="Images\wsj-fitted.png" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
   </PropertyGroup>

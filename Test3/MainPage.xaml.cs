@@ -33,10 +33,13 @@ namespace Test3
         List<NewsItem> news = new List<NewsItem>();
         Geolocator geolocator;
         Pushpin me;
+        NewsReader nr;
 
         public MainPage()
         {
             this.InitializeComponent();
+
+            // NewsListView.DataContext = news;
 
             //List<NewsItem> newsItems = new List<NewsItem>();
             //NewsItem ni = new NewsItem();
@@ -111,7 +114,7 @@ namespace Test3
             newsSources.Add(blekkoIndiaUpdater);
             newsSources.Add(blekkoSAUpdater);
             newsSources.Add(blekkoUSUpdater);
-            NewsReader nr = new NewsReader(newsSources);
+            nr = new NewsReader(newsSources);
             Update(nr);
         }
 
@@ -166,8 +169,6 @@ namespace Test3
             {
                 AlchemyService.StartWebRequest(ni, this);
             }
-
-            
         }
 
         int count = 1;
@@ -176,24 +177,24 @@ namespace Test3
 
         public void RespondToAlchemyUpdate(NewsItem newni)
         {
-            if (count >= size)
-            {
-                this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(
-                   () =>
-                   {
+            //if (count >= size)
+            //{
+                //this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(
+                //   () =>
+                //   {
 
-                       foreach (NewsItem ri in thingsToRemove)
-                       {
-                           news.Remove(ri);
-                       }
+                //       foreach (NewsItem ri in thingsToRemove)
+                //       {
+                //           news.Remove(ri);
+                //       }
 
-                       NewsListView.DataContext = null;
-                       NewsListView.DataContext = news;
+                //       //NewsListView.DataContext = null;
+                //       //NewsListView.DataContext = news;
 
-                       thingsToRemove.Clear();
-                   }));
-            }
-            count++;
+                //       thingsToRemove.Clear();
+                //   }));
+            //}
+            //count++;
             if (!((newni.Latitude == 0.0)&&(newni.Longitude == 0.0)))
             {
                 foreach (NewsItem ni in news)
@@ -210,14 +211,51 @@ namespace Test3
                                newp.Tag = ni;
                                MainMap.Children.Add(newp);
                                MapLayer.SetPosition(newp, new Location(ni.Latitude, ni.Longitude));
+
+                               NewsListView.Items.Add(newni);
+                               NewsListView.SelectionChanged += NewsListView_SelectionChanged;
                            }));
                     }
                 }
             }
             else
             {
-                thingsToRemove.Add(newni);
+                
+                this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, new DispatchedHandler(
+                    () =>
+                    {
+                        //news.Remove(newni);
+
+                        //NewsListView.Items.Remove(newni);
+
+                        //NewsListView.DataContext = null;
+                        //NewsListView.DataContext = news;
+                    }));
+                //thingsToRemove.Add(newni);
             }
+        }
+
+        void NewsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListView lv = (ListView) sender;
+            NewsItem ni = (NewsItem) lv.SelectedItem;
+
+            foreach (Pushpin p in MainMap.Children)
+            {
+                MainMap.Center = new Location(ni.Latitude, ni.Longitude);
+                p.Background = new SolidColorBrush(Windows.UI.Colors.CornflowerBlue);
+
+            }
+
+            foreach (Pushpin p in MainMap.Children)
+            {
+                if (p.Tag == ni)
+                {
+                    p.Background = new SolidColorBrush(Windows.UI.Colors.HotPink);
+                    break;
+                }
+            }
+            
         }
 
         async void newp_Tapped(object sender, TappedRoutedEventArgs e)
@@ -247,25 +285,34 @@ namespace Test3
 
         private void Image_Tapped_1(object sender, TappedRoutedEventArgs e)
         {
-            Image img = (Image)sender;
-            NewsItem ni = (NewsItem)img.Tag;
+          
+            //Image img = (Image)sender;
+            //NewsItem ni = (NewsItem)img.Tag;
 
-            foreach (Pushpin p in MainMap.Children)
-            {
-                MainMap.Center = new Location(ni.Latitude, ni.Longitude);
-                p.Background = new SolidColorBrush(Windows.UI.Colors.CornflowerBlue);
+            //foreach (Pushpin p in MainMap.Children)
+            //{
+            //    MainMap.Center = new Location(ni.Latitude, ni.Longitude);
+            //    p.Background = new SolidColorBrush(Windows.UI.Colors.CornflowerBlue);
               
-            }
+            //}
 
-            foreach (Pushpin p in MainMap.Children)
-            {
-                if (p.Tag == ni)
-                {
-                    p.Background = new SolidColorBrush(Windows.UI.Colors.HotPink);
-                    break;
-                }
-            }
+            //foreach (Pushpin p in MainMap.Children)
+            //{
+            //    if (p.Tag == ni)
+            //    {
+            //        p.Background = new SolidColorBrush(Windows.UI.Colors.HotPink);
+            //        break;
+            //    }
+            //}
             
+        }
+
+        private void Button_Click_Refresh(object sender, RoutedEventArgs e)
+        {
+            news.Clear();
+            MainMap.Children.Clear();
+            NewsListView.Items.Clear();
+            Update(nr);
         }
     }
 }

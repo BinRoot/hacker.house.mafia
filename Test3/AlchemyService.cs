@@ -13,7 +13,9 @@ namespace NewsLib
 {
     public static class AlchemyService
     {
-        private static String apiurl = "http://access.alchemyapi.com/calls/url/URLGetRankedConcepts?apikey=2605a2c3d5548b446ed09bfbdefe41ff4555aa2a&outputMode=json&url=";
+        // 7b442e0b5253276271588945ae4b6815c80fd295
+        // 2605a2c3d5548b446ed09bfbdefe41ff4555aa2a
+        private static String apiurl = "http://access.alchemyapi.com/calls/url/URLGetRankedConcepts?apikey=7b442e0b5253276271588945ae4b6815c80fd295&outputMode=json&url=";
 
         static MainPage mp = null;
 
@@ -40,6 +42,7 @@ namespace NewsLib
             // finds lat long from responseFromServer
             JObject jo = JObject.Parse(responseFromServer);
             JArray ja = (JArray)jo["concepts"];
+
 
             NewsItem ni = ((NewsItem)myTuple.Item2);
 

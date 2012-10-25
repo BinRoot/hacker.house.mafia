@@ -46,6 +46,8 @@ namespace NewsLib.NewsUpdaters
                 string urlFound = (string)jao["url"];
                 ni.LinkUri = new Uri(urlFound);
 
+                ni.ImgUri = new Uri("Images\\cbs-fitted.png");
+
                 newsList.Add(ni);
             }
 

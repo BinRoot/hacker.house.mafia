@@ -33,7 +33,7 @@ namespace NewsLib.Model
                 {
                     return new BitmapImage(ImgUri);
                 }
-                catch
+                catch (Exception e)
                 {
                     return new BitmapImage( new Uri("http://placekitten.com/200/300") );
                 }

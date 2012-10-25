@@ -17,76 +17,56 @@
         </Grid.ColumnDefinitions>
 
         <bm:Map Name="MainMap" ZoomLevel="3" Credentials="AhrsbBfWVAnxFwOsw5ARNmg2r_rjHf5nNTKa-bsdhKUZaLSwIsLi7m5_lo86b2XL" Grid.Column="0" Grid.ColumnSpan="2" FontFamily="Global User Interface" Opacity="0.99" RenderTransformOrigin="0.5,0.5">
-        	    
-            
+
                 <bm:Map.Center>
                     <bm:Location Latitude="48" Longitude="-122.580489" />
                 </bm:Map.Center>
            
-
-                <!--<bm:Map.Children>
-
-                <bm:Pushpin>
-                    <bm:MapLayer.Position>
-                        <bm:Location Latitude="34.8545" Longitude="37.0261" />
-                    </bm:MapLayer.Position>
-                </bm:Pushpin>
-
-                <bm:Pushpin>
-                    <bm:MapLayer.Position>
-                        <bm:Location Latitude="32.9043" Longitude="110.4677" />
-                    </bm:MapLayer.Position>
-                </bm:Pushpin>
-
-                <bm:Pushpin>
-                    <bm:MapLayer.Position>
-                        <bm:Location Latitude="33.6804" Longitude="51.1689" />
-                    </bm:MapLayer.Position>
-                </bm:Pushpin>
-
-                <bm:Pushpin>
-                    <bm:MapLayer.Position>
-                        <bm:Location Latitude="40.7143" Longitude="73.8204" />
-                    </bm:MapLayer.Position>
-                </bm:Pushpin>
-
-                <bm:Pushpin>
-                    <bm:MapLayer.Position>
-                        <bm:Location Latitude="40.2012" Longitude="127.2565" />
-                    </bm:MapLayer.Position>
-                </bm:Pushpin>
-            </bm:Map.Children>-->
             </bm:Map>
+
+        <Grid Grid.Column="1" Background="#55000000">
             
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Button Height="100" Width="300" Grid.Row="0" Click="Button_Click_Refresh" >
+                <TextBlock>
+                    Refresh
+                </TextBlock>
+            </Button>
+
+            <ListView Name="NewsListView" Grid.Row="1" ItemsSource="{Binding}" Background="#88000000">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="100" Width="Auto">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="75"/>
+                            </Grid.RowDefinitions>
+
+                            <Image Stretch="UniformToFill" Tag="{Binding}" Grid.ColumnSpan="2" Grid.RowSpan="2" Source="{Binding ImgBit, Mode=TwoWay}" Tapped="Image_Tapped_1">
+                            </Image>
+
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding DateAddedStr, Mode=TwoWay}" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0"  TextWrapping="Wrap" Text="{Binding Title, Mode=TwoWay}" >
+                            </TextBlock>
+
+
+
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </Grid>
         
-        <ListView Name="NewsListView" ItemsSource="{Binding}" Grid.Column="1" Background="#88000000">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Height="200" Width="Auto">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="50"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="50"/>
-                        </Grid.RowDefinitions>
-                        
-                        <Image Stretch="UniformToFill" Tag="{Binding}" Grid.ColumnSpan="2" Grid.RowSpan="2" Source="{Binding ImgBit}" Tapped="Image_Tapped_1">
-                        </Image>
-
-                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding DateAddedStr}" />
-
-                        <TextBlock Grid.Row="1" Grid.Column="0"  TextWrapping="Wrap" Text="{Binding Title}" >
-                        </TextBlock>
-                        
-
-
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-
-        </ListView>
         
     </Grid>
 </Page>
